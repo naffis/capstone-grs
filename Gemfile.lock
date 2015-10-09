@@ -131,5 +131,5 @@ PLATFORMS
 DEPENDENCIES
   html-proofer
   jekyll
-  rake (~> 10.1)
+  rake (~> 10)
   travis
