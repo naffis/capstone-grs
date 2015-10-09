@@ -4,38 +4,39 @@ require "tmpdir"
 require "bundler/setup"
 require "jekyll"
 
-desc 'Generate deck from Travis CI and publish to GitHub Pages.'
-task :travis do
-  # if this is a pull request, do a simple build of the site and stop
-  if ENV['TRAVIS_PULL_REQUEST'].to_s.to_i > 0
-    puts 'Pull request detected. Executing build only.'
-    sh 'bundle exec rake build'
-    next
+GITHUB_REPONAME = "naffis/capstone-grs"
+
+desc "Generate blog files"
+task :generate do
+  Jekyll::Site.new(Jekyll.configuration({
+    "source"      => ".",
+    "destination" => "_site"
+  })).process
+end
+
+desc "Generate and publish blog to gh-pages (travis)"
+task :default => [:generate] do
+  Dir.mktmpdir do |tmp|
+    cp_r "_site/.", tmp
+    Dir.chdir tmp
+    system "git init"
+    system "git add ."
+    message = "Site updated at #{Time.now.utc}"
+    system "git commit -m #{message.inspect}"
+    system "git push --force https://${GH_TOKEN}@${GH_REF} master:gh-pages"
   end
+end
 
-  repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:').strip
-  deploy_url = repo.gsub %r{https://}, "https://#{ENV['GH_TOKEN']}@"
-  deploy_branch = repo.match(/github\.io\.git$/) ? 'master' : 'gh-pages'
-  rev = %x(git rev-parse HEAD).strip
-
-  Dir.mktmpdir do |dir|
-    dir = File.join dir, 'site'
-    sh 'bundle exec rake build'
-    fail "Build failed." unless Dir.exists? destination
-    sh "git clone --branch #{deploy_branch} #{repo} #{dir}"
-    sh %Q(rsync -rt --del --exclude=".git" --exclude=".nojekyll" #{destination} #{dir})
-    Dir.chdir dir do
-      # setup credentials so Travis CI can push to GitHub
-      verbose false do
-        sh "git config user.name '#{ENV['GIT_NAME']}'"
-        sh "git config user.email '#{ENV['GIT_EMAIL']}'"
-      end
-
-      sh 'git add --all'
-      sh "git commit -m 'Built from #{rev}'."
-      verbose false do
-        sh "git push -q #{deploy_url} #{deploy_branch}"
-      end
-    end
+desc "Generate and publish blog to gh-pages (locally)"
+task :publish => [:generate] do
+  Dir.mktmpdir do |tmp|
+    cp_r "_site/.", tmp
+    Dir.chdir tmp
+    system "git init"
+    system "git add ."
+    message = "Site updated at #{Time.now.utc}"
+    system "git commit -m #{message.inspect}"
+    system "git remote add origin git@github.com:#{GITHUB_REPONAME}.git"
+    system "git push origin gh-pages --force"
   end
 end
