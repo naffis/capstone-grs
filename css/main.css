@@ -1,0 +1,124 @@
+---
+---
+
+html, body {
+  background-color: #E5E2D3;
+  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 40px;
+}
+
+
+nav {
+    // set animation
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+nav.blue {
+  background-color: #003E7E;  
+}
+
+nav.sticky {
+  top: 0;
+  position: fixed;  
+  background-color: #003E7E;
+}
+
+.navbar {        
+  border-top: 5px;
+  border-bottom: 5px;
+  border-style: solid;
+  border-color: #E5E2D3;
+  width: 100%;
+  z-index: 100;
+}
+
+.navbar-nav {
+  float: none;
+  margin: 0 auto;
+  display: table;
+  table-layout: fixed;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #0071E4;
+}
+
+.navbar-nav>li>a {
+  display: inline-block;
+}
+
+.navbar-nav>li:after {
+  content: "|";
+}
+
+.navbar-nav>li:last-child:after {
+  content: "";
+}       
+
+nav.blue a:link, nav.blue a:visited, nav.blue a:hover, nav.blue a:active { 
+  color:#FFF; 
+}
+
+nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active { 
+  color:#FFF; 
+}
+.banner {
+  position: relative;
+  width: 100%;
+  margin-top: 350px;
+  padding-top: 30px;      
+  padding-bottom: 30px;
+  background-color: #003E7E;
+  z-index: 100;
+  opacity: 0.90;
+  font-size: 24px;
+  color: #FFF;
+  text-align: center;
+}
+
+#home {
+  background: url({{ site.baseurl }}/img/archives-building.jpg) no-repeat center center fixed; 
+  display: table;
+  height: 600px;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#entries {  
+  padding-top: 75px;  
+  background-color: #FFF;
+  display: table;
+  height: 800px;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  color: #0071E4;
+  text-align: center;        
+}            
+
+.entries {
+  position: relative;
+  top: 200px;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  padding:0; 
+  margin:0;
+}
+
+.table {
+  background-color: #FFF;  
+}
+
+.footer {
+  text-align: center;
+}

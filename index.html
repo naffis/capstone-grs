@@ -1,0 +1,28 @@
+---
+layout: default
+---  
+<!-- first section -->
+<div id="home" class="home">
+  <div class="banner">Agency Services - Capstone GRS</div>     
+</div>
+{% include navbar.html %}
+
+<!-- second section - entries -->
+<div id="entries">  
+    <div class="col-md-12">
+      <h1>Entries</h1>      
+      <p>Text</p>
+    </div>   
+  
+</div>
+
+<script type="text/javascript">
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 600){  
+      $('nav').addClass("sticky");
+    }
+    else{
+      $('nav').removeClass("sticky");
+    }
+  }); 
+</script>

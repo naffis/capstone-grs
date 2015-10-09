@@ -1,0 +1,134 @@
+html, body {
+  background-color: #E5E2D3;
+  height: 100%;
+  width: 100%;
+  padding: 40px 15px;  
+  text-align: center;
+  padding-top: 0px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.navbar {        
+  border-top: 5px;
+  border-bottom: 5px;
+  border-style: solid;
+  border-color: #E5E2D3;
+  width: 100%;
+  z-index: 100;
+}
+
+.navbar-nav {
+  float: none;
+  margin: 0 auto;
+  display: table;
+  table-layout: fixed;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.navbar-nav>li>a {
+  display: inline-block;
+}
+
+.navbar-nav>li:after {
+  content: "|";
+}
+
+.navbar-nav>li:last-child:after {
+  content: "";
+}
+
+.affix {
+  top: 0;
+  width: 100%;   
+  border: 0px;     
+  background-color: rgba(201,63,22,.75);
+  opacity: 0.95;
+  color: #000;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  margin-top: 375px;
+  padding-top: 30px;      
+  padding-bottom: 30px;
+  background-color: rgba(201,63,22,.75);
+  z-index: 100;
+  opacity: 0.95;
+  font-size: 24px;
+  color: #FFF;
+}
+
+#home {
+  background: url(/img/tehran-conference.jpg) no-repeat center center fixed; 
+  display: table;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  transform: translateZ(0);
+}
+
+#gallery {
+  background: url(/img/white-house.jpg) no-repeat center center fixed; 
+  display: table;
+  height: 800px;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  color: #000;             
+}            
+
+#presidents {
+  background: url(/img/air-force-one.jpg) no-repeat center center fixed; 
+  display: table;
+  height: 800px;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  color: #000;     
+}
+
+.gallery {
+  position: relative;
+  top: 200px;
+  width: 100%;
+}
+
+.presidents {
+  position: relative;
+  top: 200px;
+  width: 100%;
+}
+
+.carousel-control {
+  padding-top:10%;
+  width:5%;
+}
+
+#gallery-carousel {
+  position: relative;
+  top: 200px;
+}
+
+#presidents-carousel {
+  position: relative;
+  top: 200px;
+}
+
+ul {
+  list-style-type: none;
+  padding:0; 
+  margin:0;
+}

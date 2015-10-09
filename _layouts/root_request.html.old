@@ -1,0 +1,30 @@
+---
+title: "test"
+layout: default
+---  
+{% include navbar.html offset="0" %}
+<div id="api" class="home">		
+	{% assign url = page.url | remove: "/api/" | remove: ".html" %}
+	{% assign url_components = url | split: "/" %}
+	{% assign data_file_name = url_components[0] %}
+
+	<table class="table table-striped table-condensed">
+		<thead>
+			<tr>				
+				{% for element in site.data[data_file_name].first %}
+				<th><a href="/api/{{ data_file_name }}/{{ element[0] | sanitize_string }}.html">{{ element[0] }}</a></th>
+				{% endfor %}	
+			</tr>
+		</thead>
+		<tbody>
+			# hover over to get full text on truncated entries
+			{% for row in site.data[data_file_name] %}
+			<tr>				
+				{% for datapoint in row %}
+				<td>{{ datapoint[1] }}</td>
+				{% endfor %}	
+			</tr>
+			{% endfor %}	
+		</tbody>
+	</table>
+</div>

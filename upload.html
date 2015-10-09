@@ -1,0 +1,164 @@
+---
+layout: default
+---  
+{% include navbar-blue.html %}
+
+<script src="{{site.baseurl}}/js/jquery-2.1.3.js"></script>
+<script src="{{site.baseurl}}/js/oauth.js"></script>
+<script src="{{site.baseurl}}/js/github.js"></script>
+<script src="{{site.baseurl}}/js/papaparse.js"></script>
+<script src="{{site.baseurl}}/js/csv.js"></script>
+
+<script>    
+  var csv_data;
+  var access_token;
+  var filename;
+
+  
+  function handleFileSelect(file) {
+    if (file.type.match(/text.*/)) {
+      filename = file.name;
+      var reader = new FileReader();        
+
+      reader.onload = function(e) {
+        csv_data = new CSV(reader.result, { header: true }).parse();            
+      }
+      reader.readAsText(file);        
+
+      if(access_token !=  null) {
+        document.getElementById("save").style.display = '';
+      }
+
+    } 
+    else {
+      // show file not supported message on the page instead
+      console.log("File not supported.");
+    }
+  }
+
+
+  //   var file = evt.target.files[0];
+  //   filename = file.name;
+
+  //   var csv = new CSV(data, { header: true });
+
+  //   Papa.parse(file, {
+  //     header: true,
+  //     dynamicTyping: true,
+  //     complete: function(results) {
+  //       data = results;        
+  //       alert(results.data.toString());
+  //     }
+  //   });
+    
+  //   if(access_token !=  null) {
+  //     document.getElementById("save").style.display = '';
+  //   }
+  // }
+ 
+  $(document).ready(function() {
+    $("#the-file-input").change(function() {                
+      handleFileSelect(this.files[0]);
+    });
+
+    // $("#csv-file").change(handleFileSelect);
+    authenticated();
+  });
+
+
+  $.urlParam = function(name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null) {
+      return null;
+    } 
+    else {
+      return results[1] || 0;
+    }
+  }
+
+  function authenticated() {
+    access_token = $.urlParam('access_token');
+    
+    if(access_token !=  null) {
+      //document.getElementById('access_token').value = access_token;    
+      document.getElementById("login").style.display = 'none';
+    }  
+    else {
+      document.getElementById("save").style.display = 'none';
+      document.getElementById("login").style.display = '';
+    }                       
+  }
+  
+  function saveFile() {    
+    var github = new Github({
+      token: access_token,
+      auth: "oauth"
+    });
+
+    var repo = github.getRepo('naffis', 'presidential-libraries'); 
+    // repo.write('master', 'path/to/file', 'YOUR_NEW_CONTENTS', 'YOUR_COMMIT_MESSAGE', function(err) {});
+    file_content = new CSV(csv_data, { header: true }).encode();
+    // alert(csv_data);
+    alert(file_content);
+    alert(filename);
+    repo.write('master', filename, file_content, 'Saving data file ' + filename, function(err) { 
+        console.log("Error", err);
+      }); 
+  }       
+
+
+
+  //   $UploadCSVName = "";
+    
+  //   $UploadFileName = document.getElementById("uploadfilename").value;
+  //   $UploadCSVName = $UploadFileName;
+  //   $DataSelector = document.getElementById("dataSelector").value;
+            
+  //   $CSVOutput = document.getElementById("dataInput").value;
+  //   $DataOutput = document.getElementById("dataOutput").value;
+  
+  //   var repo = github.getRepo('naffis', 'testcsv'); 
+  //   repo.write('gh-pages', $UploadCSVName, $CSVOutput, 'Saving CSV Input for ' + $UploadCSVName, function(err) {}); 
+  //   //repo.write('master', 'path/to/file', 'YOUR_NEW_CONTENTS', 'YOUR_COMMIT_MESSAGE', function(err) {});
+  // }
+
+  // function readfile(f) {
+  //   var reader = new FileReader(); 
+  //   reader.readAsText(f); 
+  //   reader.onload = function() { 
+  //     var text = reader.result; 
+  //     document.getElementById('uploadfilename').value = f.name;
+  //     var out = document.getElementById("dataInput");  
+  //     out.innerHTML = "";                          
+  //     out.appendChild(document.createTextNode(text));
+      
+  //     $access_token = $.urlParam('access_token');
+  //     // //alert(oAuth_Token);
+  //     if($access_token !=  null) {
+  //       document.getElementById("save").style.display = '';
+  //     }
+  //   };
+  //   reader.onerror = function(e) {
+  //     console.log("Error", e);  
+  //   };
+  // }
+</script>  
+
+
+<div class="col-md-12">
+  <div class="row">
+
+  	<input id="the-file-input" type="file">
+
+    <div id="login" style="display: none;">  
+      <p align="center"><a href="{{site.baseurl}}/login.html">Login</a></p>
+    </div>
+    <div id="save" style="display: none;"> 
+      <p align="center"><a href="#" onclick="saveFile();">Save</a></p>
+    </div>    
+    
+  </div>
+</div>
+
+  
+
