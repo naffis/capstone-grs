@@ -14,4 +14,4 @@ env:
 install:
 - git config --global user.email "davidnaffis@gmail.com"
 - git config --global user.name "naffis"
-- bundle install
+- travis_wait bundle install

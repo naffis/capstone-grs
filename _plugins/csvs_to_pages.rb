@@ -7,7 +7,7 @@ module Jekyll
       @base = base
       @dir = dir
       @name = filename   
-      puts filename   
+      # puts filename   
       
       self.process(@name)
       self.read_yaml(File.join(base, '_layouts'), template)
@@ -35,7 +35,7 @@ module Jekyll
         data['keys'] = file_data.headers.map { |key|
           sanitize_string(key)
         }
-        puts "keys = #{data['keys']}"
+        # puts "keys = #{data['keys']}"
 
         data['content'] = file_data.to_a[1..-1]
 

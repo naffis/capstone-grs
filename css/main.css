@@ -9,7 +9,7 @@ html, body {
 
 
 nav {
-    // set animation
+  // set animation
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
@@ -62,6 +62,7 @@ nav.blue a:link, nav.blue a:visited, nav.blue a:hover, nav.blue a:active {
 nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active { 
   color:#FFF; 
 }
+
 .banner {
   position: relative;
   width: 100%;
@@ -77,16 +78,59 @@ nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active
 }
 
 #home {
-  background: url({{ site.baseurl }}/img/archives-building.jpg) no-repeat center center fixed; 
+  background: url({{ site.baseurl }}/img/archives-building.jpg) no-repeat center center fixed;   
   display: table;
   height: 600px;
-  position: relative;
+  /*position: relative;*/
   width: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-repeat: repeat;  
 }
+
+#about {  
+  padding-top: 75px;  
+  background-color: #FFF;
+  display: table;
+  height: 800px;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  color: #0071E4;
+  text-align: center;        
+}     
+
+#about p {
+  text-align: left;
+  padding-left: 10%;
+  padding-right: 10%;
+  color: #000;
+}
+
+#about a {
+  text-decoration: underline;
+}
+#about h1 {
+  padding-bottom: 30px;
+}
+
+#about ul {
+  text-align: left;
+  padding-left: 15%;
+  padding-right: 10%;
+  color: #000;
+}
+
+.about {
+  position: relative;
+  top: 200px;
+  width: 100%;
+} 
 
 #entries {  
   padding-top: 75px;  
@@ -109,7 +153,49 @@ nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active
   width: 100%;
 }
 
-ul {
+#additional {  
+  padding-top: 75px;  
+  background-color: #FFF;
+  display: table;
+  height: 800px;
+  position: relative;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  color: #0071E4;
+  text-align: center;        
+}            
+
+#additional p {
+  text-align: left;
+  padding-left: 10%;
+  padding-right: 10%;
+  color: #000;
+}
+
+#additional a {
+  text-decoration: underline;
+}
+#additional h1 {
+  padding-bottom: 30px;
+}
+
+#additional ul {
+  text-align: left;
+  padding-left: 15%;
+  padding-right: 10%;
+  color: #000;
+}
+
+.additional {
+  position: relative;
+  top: 200px;
+  width: 100%;
+}
+
+ul.footer {
   list-style-type: none;
   padding:0; 
   margin:0;
