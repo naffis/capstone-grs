@@ -9,31 +9,75 @@ layout: default
 
 <!-- second section - about -->
 <div id="about">  
-    <div class="col-md-12">
-      <h1>About GRS 6.1</h1>      
-      <p>The National Archives and Records Administration issued General Records Schedule (GRS) <a href="http://www.archives.gov/records-mgmt/grs/grs-6.1-review-package.pdf">6.1 Email Managed under a Capstone Approach</a> to provide Federal agencies legal authority to disposition email under the Capstone Approach.  This approach was issued and is outlined in <a href="http://www.archives.gov/records-mgmt/bulletins/2013/2013-02.html">Bulletin 2013-02</a>.</p>
-      <p>The GRS 6.1 schedule applies only to Federal agencies that implement a Capstone approach as described in this GRS.  If an agency is implementing a Capstone disposition approach different from what is provided in this GRS, the agency must submit a records schedule.</p>
-      <p>This site contains data sets for active approved verification forms, NA-1005s, submitted by Federal agencies requesting use of these disposition authorities in GRS 6.1.</p>
-      <p>Data from this form includes:</p>
-      <ul>
-        <li>Name of the agency to which this form applies;</li>
-        <li>Applicable record group number;</li>
-        <li>Selection of which GRS 6.1 items the agency is proposing to use;</li>
-        <li>Information on implementation scope and legacy email; and</li>
-        <li>List of Capstone Officials.</li>
-      </ul>
-      <p>For questions on the GRS 6.1 and/or form NA-1005, please contact NARA’s <a href="mailto:GRS_Team@nara.gov">GRS Team</a>.</p>
-    </div>     
+  <div class="col-md-12">
+    <h1>About GRS 6.1</h1>      
+    <p>The National Archives and Records Administration issued General Records Schedule (GRS) <a href="http://www.archives.gov/records-mgmt/grs/grs-6.1-review-package.pdf">6.1 Email Managed under a Capstone Approach</a> to provide Federal agencies legal authority to disposition email under the Capstone Approach.  This approach was issued and is outlined in <a href="http://www.archives.gov/records-mgmt/bulletins/2013/2013-02.html">Bulletin 2013-02</a>.</p>
+    <p>The GRS 6.1 schedule applies only to Federal agencies that implement a Capstone approach as described in this GRS.  If an agency is implementing a Capstone disposition approach different from what is provided in this GRS, the agency must submit a records schedule.</p>
+    <p>This site contains data sets for active approved verification forms, NA-1005s, submitted by Federal agencies requesting use of these disposition authorities in GRS 6.1.</p>
+    <p>Data from this form includes:</p>
+    <ul>
+      <li>Name of the agency to which this form applies;</li>
+      <li>Applicable record group number;</li>
+      <li>Selection of which GRS 6.1 items the agency is proposing to use;</li>
+      <li>Information on implementation scope and legacy email; and</li>
+      <li>List of Capstone Officials.</li>
+    </ul>
+    <p>For questions on the GRS 6.1 and/or form NA-1005, please contact NARA’s <a href="mailto:GRS_Team@nara.gov">GRS Team</a>.</p>
+  </div>     
 </div>
-
+<br/>
 <!-- third section - entries -->
 <div id="entries">  
-    <div class="col-md-12">
-      <h1>Entries</h1>      
-      <p>Text</p>
+  <h1>Entries</h1>      
+  
+    <div class="col-md-8 col-md-offset-2">
+
+      <div class="panel with-nav-tabs panel-primary">
+        
+        <div class="panel-heading">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tabdate" data-toggle="tab">By Date</a></li>
+            <li><a href="#tabagency" data-toggle="tab">By Agency</a></li>
+            <li><a href="#tabrecordgroup" data-toggle="tab">By Record Group</a></li>
+          </ul>
+        </div>
+
+        <div class="panel-body">
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="tabdate">
+              {% for row in site.data['forms'] %}
+              <li>          
+                <a href="{{ site.baseurl }}/api/forms/received-date/{{ row['Received Date'] | sanitize_string }}.html">
+                  {{ row['Received Date'] }}
+                </a>
+              </li>
+              {% endfor %}  
+            </div>
+            <div class="tab-pane fade" id="tabagency">
+              {% for row in site.data['forms'] %}
+              <li>          
+                <a href="{{ site.baseurl }}/api/forms/name-of-agency/{{ row['Name of Agency'] | sanitize_string }}.html">
+                  {{ row['Name of Agency'] }}
+                </a>
+              </li>
+              {% endfor %}  
+            </div>
+            <div class="tab-pane fade" id="tabrecordgroup">              
+              {% for row in site.data['forms'] %}
+              <li>          
+                <a href="{{ site.baseurl }}/api/forms/record-group-number/{{ row['Record Group Number'] | sanitize_string }}.html">
+                  {{ row['Record Group Number'] }}
+                </a>
+              </li>
+              {% endfor %}  
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>     
 </div>
-
+<br/>
 <!-- fourth section - entries -->
 <div id="additional">  
     <div class="col-md-12">

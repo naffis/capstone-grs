@@ -55,11 +55,11 @@ nav.sticky {
   content: "";
 }       
 
-nav.blue a:link, nav.blue a:visited, nav.blue a:hover, nav.blue a:active { 
-  color:#FFF; 
+#nav.blue a:link, nav.blue a:visited, nav.blue a:active, nav.blue a:hover { 
+  color:#FFF;
 }
 
-nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active { 
+nav.sticky a:link, nav.sticky a:visited, nav.sticky a:active, nav.sticky a:hover { 
   color:#FFF; 
 }
 
@@ -115,8 +115,10 @@ nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active
 #about a {
   text-decoration: underline;
 }
+
 #about h1 {
   padding-bottom: 30px;
+  font-weight: 600;
 }
 
 #about ul {
@@ -146,6 +148,31 @@ nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active
   color: #0071E4;
   text-align: center;        
 }            
+
+#entries p {
+  text-align: left;
+  padding-left: 10%;
+  padding-right: 10%;
+  color: #000;
+}
+
+#entries h1 {
+  padding-bottom: 30px;
+  font-weight: 600;
+}
+
+#entries ul {
+  text-align: left;
+  padding-left: 15%;
+  padding-right: 10%;
+  color: #000;
+}
+
+.entries {
+  position: relative;
+  top: 200px;
+  width: 100%;
+} 
 
 .entries {
   position: relative;
@@ -180,6 +207,7 @@ nav.sticky a:link, nav.sticky a:visited, nav.sticky a:hover, nav.sticky a:active
 }
 #additional h1 {
   padding-bottom: 30px;
+  font-weight: 600;
 }
 
 #additional ul {
@@ -207,4 +235,37 @@ ul.footer {
 
 .footer {
   text-align: center;
+}
+
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+  border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+  margin-bottom: -1px;
+}
+
+.with-nav-tabs.panel-primary .nav-tabs > li > a,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+    color: #fff;
+}
+.with-nav-tabs.panel-primary .nav-tabs > .open > a,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+  color: #fff;
+  background-color: #3071a9;
+  border-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+  color: #428bca;
+  background-color: #fff;
+  border-color: #428bca;
+  border-bottom-color: transparent;
 }

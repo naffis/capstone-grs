@@ -148,15 +148,21 @@ layout: default
 <div class="col-md-12">
   <div class="row">
 
-  	<input id="the-file-input" type="file">
-
     <div id="login" style="display: none;">  
-      <p align="center"><a href="{{site.baseurl}}/login.html">Login</a></p>
+      <p align="center">
+        <a href="{{site.baseurl}}/login.html">Login</a>
+      </p>
     </div>
-    <div id="save" style="display: none;"> 
-      <p align="center"><a href="#" onclick="saveFile();">Save</a></p>
-    </div>    
     
+    <p align="center">
+  	  <input id="the-file-input" type="file">
+    </p>
+
+    <p>
+      <div id="save" style="display: none;"> 
+        <p align="center"><a href="#" onclick="saveFile();">Save</a></p>
+      </div>    
+    </p>
   </div>
 </div>
 
