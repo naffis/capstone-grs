@@ -14,23 +14,41 @@ The site also contains a small amount of additional information and links to oth
 
 ## How to run
 
-Capstone GRS is built on Jekyll and hosted on GitHub pages. The site content can be built locally and deployed to GitHub pages manually or you can use TravisCI to build the content and push to GitHub pages.
+Capstone GRS is built using Jekyll and hosted on GitHub pages. We're using several custom plugins that can be run on GitHub pages so you'll need to either build the content locally and then manually publish the _site content or automate the process using Travis CI.
 
 To run the site locally:
 
-    bundle exec jekyll serve --trace
+    bundle exec jekyll serve
 
-To build locally and push to GitHub pages:
+To build locally or to use Travis CI you'll have to modify your repository in the following way. From your project directory run the following:
+
+    git init
+    git remote add origin git@github.com:userName/repositoryName.git
+    jekyll build
+    git checkout master
+    git add -A
+    git commit -m "base source"
+    git push origin master
+    cd _site
+    touch .nojekyll
+    git init
+    git remote add origin git@github.com:userName/repositoryName.git
+    git checkout -b gh-pages
+		git add -A
+		git commit -m "first build"
+		git push origin gh-pages
+
+Note this process is for hosting on a project page. The process for hosting on a user or organization page is slightly different. 
+
+Once you complete the steps above you can build locally and push to GitHub pages by running the following command:
 
     rake publish
 
-To have TravisCI automatically publish your content to GitHub pages you'll need to do the following:
-
-    do something
+To have Travis CI automatically publish your content to GitHub pages you'll need to complete the steps above and then modify your .travis.yml and Rakefile accordingly. Once you've done that you can simply commit your changes and Travis CI will build and publish the content for you. 
 
 ## How you can help
 
-We welcome contributions. If you would like to contribute to the project you can do so by forking the repository and submitting your changes through a pull request.. You can submit issues and requests through the [GitHub Issues](https://github.com/naffis/capstone-grs/issues).
+We welcome contributions. If you would like to contribute to the project you can do so by forking the repository and submitting your changes in a pull request. You can submit issues using [GitHub Issues](https://github.com/naffis/capstone-grs/issues).
 
 ## License
 
