@@ -34,9 +34,9 @@ To build locally or to use Travis CI you'll have to modify your repository in th
     git init
     git remote add origin git@github.com:userName/repositoryName.git
     git checkout -b gh-pages
-		git add -A
-		git commit -m "first build"
-		git push origin gh-pages
+    git add -A
+    git commit -m "first build"
+    git push origin gh-pages
 
 Note this process is for hosting on a project page. The process for hosting on a user or organization page is slightly different. 
 
@@ -44,7 +44,7 @@ Once you complete the steps above you can build locally and push to GitHub pages
 
     rake publish
 
-To have Travis CI automatically publish your content to GitHub pages you'll need to complete the steps above and then modify your .travis.yml and Rakefile accordingly. Once you've done that you can simply commit your changes and Travis CI will build and publish the content for you. 
+To have Travis CI automatically publish your content to GitHub pages you'll need to complete the steps above and then modify your .travis.yml file and Rakefile accordingly. Once you've done that you can simply commit your changes and Travis CI will build and publish the content for you. 
 
 ## How you can help
 
