@@ -10,36 +10,44 @@ layout: default
 <script src="{{site.baseurl}}/js/csv.js"></script>
  -->
 <script>    
-  var access_token;
-  var file;
+  var access_token;  
   var filename;
-  var file_content;
-  
-  function handleFileSelect(f) {
-    if (f.type.match(/.(pdf)$/)) {
-      filename = f.name;
-      file = f;
-     
-      if(access_token !=  null) {
-        document.getElementById("save").style.display = '';
-      }
+  var raw_data;
 
-    } 
-    else {
-      console.log("File not supported.");
-    }
-  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    raw_data = base64ArrayBuffer(e.target.result);
+  };
+  reader.onerror = function(e) {
+    console.log("Error", e);  
+  };
 
- 
   $(document).ready(function() {
+    access_token = $.urlParam('access_token');
+
+    if(access_token !=  null) {
+      document.getElementById('access_token').value = access_token;    
+      document.getElementById("login").style.display = 'none';      
+    }  
+    else {
+      document.getElementById("save").style.display = 'none';
+      document.getElementById("login").style.display = '';
+    }  
+
     $("#the-file-input").change(function() {                      
-      handleFileSelect(this.files[0]);
+      if (this.files[0].type.match(/.(pdf)$/)) {
+        filename = this.files[0].name;
+        reader.readAsArrayBuffer(this.files[0]); 
+        if(access_token !=  null) {
+          document.getElementById("save").style.display = '';
+        }
+      } 
+      else {
+        console.log("File not supported.");
+      }      
     });
 
-    // $("#csv-file").change(handleFileSelect);
-    authenticated();
   });
-
 
   $.urlParam = function(name) {
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -51,20 +59,6 @@ layout: default
     }
   }
 
-  function authenticated() {
-    access_token = $.urlParam('access_token');
-    
-    if(access_token !=  null) {
-      //document.getElementById('access_token').value = access_token;    
-      document.getElementById("login").style.display = 'none';
-      // document.getElementById("save").style.display = '';
-    }  
-    else {
-      document.getElementById("save").style.display = 'none';
-      document.getElementById("login").style.display = '';
-    }                       
-  }
-  
   function saveFile() {    
     var github = new Github({
       token: access_token,
@@ -72,22 +66,63 @@ layout: default
     });
 
     var repo = github.getRepo('naffis', 'capstone-grs');
-    alert(filename);
-    alert(file.name);
-
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      var file_content = reader.result;
-      
-    };
-    reader.onerror = function(e) {
-      console.log("Error", e);  
-    };
-    // reader.readAsDataURL(file);
-    reader.readAsBinaryString(file); 
-
-    repo.write('master', '/forms/'+filename, 'test', 'Saving data file ' + filename, function(err) {});        
+    var options = {
+      encode: false // Whether to base64 encode the file. (default: true)
+    }
+    repo.write('master', 'forms/'+filename, raw_data, 'Saving data file ' + filename, options, function(err) {})
   }       
+
+  function base64ArrayBuffer(arrayBuffer) {
+    var base64    = ''
+    var encodings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+
+    var bytes         = new Uint8Array(arrayBuffer)
+    var byteLength    = bytes.byteLength
+    var byteRemainder = byteLength % 3
+    var mainLength    = byteLength - byteRemainder
+
+    var a, b, c, d
+    var chunk
+
+    // Main loop deals with bytes in chunks of 3
+    for (var i = 0; i < mainLength; i = i + 3) {
+      // Combine the three bytes into a single integer
+      chunk = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2]
+
+      // Use bitmasks to extract 6-bit segments from the triplet
+      a = (chunk & 16515072) >> 18 // 16515072 = (2^6 - 1) << 18
+      b = (chunk & 258048)   >> 12 // 258048   = (2^6 - 1) << 12
+      c = (chunk & 4032)     >>  6 // 4032     = (2^6 - 1) << 6
+      d = chunk & 63               // 63       = 2^6 - 1
+
+      // Convert the raw binary segments to the appropriate ASCII encoding
+      base64 += encodings[a] + encodings[b] + encodings[c] + encodings[d]
+    }
+
+    // Deal with the remaining bytes and padding
+    if (byteRemainder == 1) {
+      chunk = bytes[mainLength]
+
+      a = (chunk & 252) >> 2 // 252 = (2^6 - 1) << 2
+
+      // Set the 4 least significant bits to zero
+      b = (chunk & 3)   << 4 // 3   = 2^2 - 1
+
+      base64 += encodings[a] + encodings[b] + '=='
+    } else if (byteRemainder == 2) {
+      chunk = (bytes[mainLength] << 8) | bytes[mainLength + 1]
+
+      a = (chunk & 64512) >> 10 // 64512 = (2^6 - 1) << 10
+      b = (chunk & 1008)  >>  4 // 1008  = (2^6 - 1) << 4
+
+      // Set the 2 least significant bits to zero
+      c = (chunk & 15)    <<  2 // 15    = 2^4 - 1
+
+      base64 += encodings[a] + encodings[b] + encodings[c] + '='
+    }
+    
+    return base64
+  }
 
 </script>  
 
@@ -103,6 +138,7 @@ layout: default
     
     <p align="center">
   	  <input id="the-file-input" type="file">
+      <input id="access_token" type="hidden">
     </p>
 
     <p>

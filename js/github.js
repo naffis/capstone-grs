@@ -3,8 +3,8 @@
  *
  * @copyright (c) 2013 Michael Aufreiter, Development Seed
  *            Github.js is freely distributable.
- *
- * @license   Licensed under MIT license
+ *de
+ * @license   Licensed under BSD-3-Clause-Clear
  *
  *            For all details and documentation:
  *            http://substance.io/michael/github
@@ -63,7 +63,8 @@
                }
             }
 
-            return url + (typeof window !== 'undefined' ? '&' + new Date().getTime() : '');
+            return url.replace(/(&timestamp=\d+)/, '') +
+               (typeof window !== 'undefined' ? '&timestamp=' + new Date().getTime() : '');
          }
 
          var xhr = new XMLHttpRequest();
@@ -122,16 +123,15 @@
 
                results.push.apply(results, res);
 
-               var links = (xhr.getResponseHeader('link') || '').split(/\s*,\s*/g);
-               var next = null;
-
-               links.forEach(function(link) {
-                  next = /rel="next"/.test(link) ? link : next;
-               });
-
-               if (next) {
-                  next = (/<(.*)>/.exec(next) || [])[1];
-               }
+               var next = (xhr.getResponseHeader('link') || '')
+                  .split(';')
+                  .filter(function(part) {
+                     return part.search(/rel="next"/) !== -1;
+                  })
+                  .map(function(part) {
+                     return part.match(/<(.+?)>/)[1];
+                  })
+                  .pop();
 
                if (!next) {
                   cb(err, results);
@@ -322,13 +322,6 @@
             sha: null
          };
 
-         // Delete a repo
-         // --------
-
-         this.deleteRepo = function(cb) {
-            _request('DELETE', repoPath, options, cb);
-         };
-
          // Uses the cache if branch has not been changed
          // -------
 
@@ -413,44 +406,49 @@
 
          this.listPulls = function(options, cb) {
             options = options || {};
-            var url = repoPath + "/pulls";
+            var url = repoPath + '/pulls';
             var params = [];
 
             if (typeof options === 'string') {
-                // backward compatibility
-                params.push('state=' + options);
-            }
-            else {
-                if (options.state) {
-                    params.push("state=" + encodeURIComponent(options.state));
-                }
-                if (options.head) {
-                    params.push("head=" + encodeURIComponent(options.head));
-                }
-                if (options.base) {
-                    params.push("base=" + encodeURIComponent(options.base));
-                }
-                if (options.sort) {
-                    params.push("sort=" + encodeURIComponent(options.sort));
-                }
-                if (options.direction) {
-                     params.push("direction=" + encodeURIComponent(options.direction));
-                }
-                if (options.page) {
-                     params.push("page=" + options.page);
-                }
-                if (options.per_page) {
-                     params.push("per_page=" + options.per_page);
-                }
+               // Backward compatibility
+               params.push('state=' + options);
+            } else {
+               if (options.state) {
+                  params.push('state=' + encodeURIComponent(options.state));
+               }
+
+               if (options.head) {
+                  params.push('head=' + encodeURIComponent(options.head));
+               }
+
+               if (options.base) {
+                  params.push('base=' + encodeURIComponent(options.base));
+               }
+
+               if (options.sort) {
+                  params.push('sort=' + encodeURIComponent(options.sort));
+               }
+
+               if (options.direction) {
+                  params.push('direction=' + encodeURIComponent(options.direction));
+               }
+
+               if (options.page) {
+                  params.push('page=' + options.page);
+               }
+
+               if (options.per_page) {
+                  params.push('per_page=' + options.per_page);
+               }
             }
 
             if (params.length > 0) {
-                url += "?" + params.join("&");
+               url += '?' + params.join('&');
             }
 
             _request('GET', url, null, function(err, pulls, xhr) {
-                if (err) return cb(err);
-                cb(null, pulls, xhr);
+               if (err) return cb(err);
+               cb(null, pulls, xhr);
             });
          };
 
@@ -515,6 +513,13 @@
                });
          };
 
+         // Get the statuses for a particular SHA
+         // -------
+
+         this.getStatuses = function(sha, cb) {
+            _request('GET', repoPath + '/statuses/' + sha, null, cb);
+         };
+
          // Retrieve the tree a commit points to
          // -------
 
@@ -536,7 +541,7 @@
                };
             } else {
                content = {
-                  content: b64encode(String.fromCharCode.apply(null, new Uint8Array(content))),
+                  content: b64encode(content),
                   encoding: 'base64'
                };
             }
@@ -552,7 +557,7 @@
 
          this.updateTree = function(baseTree, path, blob, cb) {
             var data = {
-               base_tree: baseTree, // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+               base_tree: baseTree,
                tree: [
             {
                path: path,
@@ -667,6 +672,13 @@
 
          this.fork = function(cb) {
             _request('POST', repoPath + '/forks', null, cb);
+         };
+
+         // List forks
+         // --------
+
+         this.listForks = function(cb) {
+            _request('GET', repoPath + '/forks', null, cb);
          };
 
          // Branch repository
@@ -797,7 +809,7 @@
             that.getSha(branch, encodeURI(path), function(err, sha) {
                var writeOptions = {
                   message: message,
-                  content: b64encode(content),
+                  content: typeof options.encode === 'undefined' || options.encode ? b64encode(content) : content,
                   branch: branch,
                   committer: options && options.committer ? options.committer : undefined,
                   author: options && options.author ? options.author : undefined
@@ -957,7 +969,7 @@
          };
 
          this.comment = function(issue, comment, cb) {
-            _request('POST', issue.comments_url, { // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+            _request('POST', issue.comments_url, {
                body: comment
             }, function(err, res) {
                cb(err, res);
