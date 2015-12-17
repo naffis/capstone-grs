@@ -9,8 +9,3 @@ emptyArray: []
 
 # Build settings
 markdown: kramdown
-
-collections:
-  xpi:
-    output: true
-    permalink: /xpi/:path/

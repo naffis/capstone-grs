@@ -2,15 +2,17 @@
 layout: default
 ---  
 <!-- first section -->
-<div id="home" class="home">
+<!-- <div id="home" class="home">
   <div class="banner">General Records Schedule (GRS) 6.1 Email Managed under a Capstone Approach</div>     
-</div>
+</div> -->
 {% include navbar.html %}
 
 <!-- second section - about -->
 <div id="about">  
   <div class="col-md-12">
-    <h1>About GRS 6.1</h1>      
+    <h1>General Records Schedule (GRS) 6.1</h1>
+    <h2>Email Managed under a Capstone Approach</h2>
+    <br/><br/>
     <p>The National Archives and Records Administration issued General Records Schedule (GRS) <a href="http://www.archives.gov/records-mgmt/grs/grs-6.1-review-package.pdf">6.1 Email Managed under a Capstone Approach</a> to provide Federal agencies legal authority to disposition email under the Capstone Approach.  This approach was issued and is outlined in <a href="http://www.archives.gov/records-mgmt/bulletins/2013/2013-02.html">Bulletin 2013-02</a>.</p>
     <p>The GRS 6.1 schedule applies only to Federal agencies that implement a Capstone approach as described in this GRS.  If an agency is implementing a Capstone disposition approach different from what is provided in this GRS, the agency must submit a records schedule.</p>
     <p>This site contains data sets for active approved verification forms, NA-1005s, submitted by Federal agencies requesting use of these disposition authorities in GRS 6.1.</p>
@@ -27,37 +29,37 @@ layout: default
 </div>
 <br/>
 <!-- third section - entries -->
-<div id="entries">  
-  <h1>Entries</h1>      
+<div id="data">  
+  <h1>Data</h1>      
   
     <div class="col-md-8 col-md-offset-2">
-
+      <p><a href="{{ site.baseurl }}/api/forms.html">View All Data</a></p>
       <div class="panel with-nav-tabs panel-primary">
         
         <div class="panel-heading">
           <ul class="nav nav-tabs">
-            <li class="active"><a href="#tabdate" data-toggle="tab">By Date</a></li>
-            <li><a href="#tabagency" data-toggle="tab">By Agency</a></li>
+            <li class="active"><a href="#tabagency" data-toggle="tab">By Agency</a></li>
+            <li><a href="#tabdate" data-toggle="tab">By Date</a></li>            
             <li><a href="#tabrecordgroup" data-toggle="tab">By Record Group</a></li>
           </ul>
         </div>
 
         <div class="panel-body">
           <div class="tab-content">
-            <div class="tab-pane fade in active" id="tabdate">
-              {% for row in site.data['forms'] %}
-              <li>          
-                <a href="{{ site.baseurl }}/api/forms/received-date/{{ row['Received Date'] | sanitize_string }}.html">
-                  {{ row['Received Date'] }}
-                </a>
-              </li>
-              {% endfor %}  
-            </div>
-            <div class="tab-pane fade" id="tabagency">
+            <div class="tab-pane fade in active" id="tabagency">
               {% for row in site.data['forms'] %}
               <li>          
                 <a href="{{ site.baseurl }}/api/forms/name-of-agency/{{ row['Name of Agency'] | sanitize_string }}.html">
                   {{ row['Name of Agency'] }}
+                </a>
+              </li>
+              {% endfor %}  
+            </div>            
+            <div class="tab-pane fade" id="tabdate">
+              {% for row in site.data['forms'] %}
+              <li>          
+                <a href="{{ site.baseurl }}/api/forms/received-date/{{ row['Received Date'] | sanitize_string }}.html">
+                  {{ row['Received Date'] }}
                 </a>
               </li>
               {% endfor %}  
@@ -97,12 +99,12 @@ layout: default
 </div>
 
 <script type="text/javascript">
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 600){  
-      $('nav').addClass("sticky");
-    }
-    else{
-      $('nav').removeClass("sticky");
-    }
-  }); 
+//   $(window).scroll(function() {
+//     if ($(this).scrollTop() > 600){  
+//       $('nav').addClass("sticky");
+//     }
+//     else{
+//       $('nav').removeClass("sticky");
+//     }
+//   }); 
 </script>

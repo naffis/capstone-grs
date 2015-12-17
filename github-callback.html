@@ -8,8 +8,8 @@ layout: default
       
   OAuth.callback('github').done(function(github) {      
     $access_token = github.access_token;
-    var redirectUrl = "{{site.baseurl}}/upload.html?access_token=" + $access_token;             
-    $(location).attr('href', redirectUrl);
+    var redirectUrl = "{{site.baseurl}}/upload.html?access_token=" + $access_token;    
+    $(location).attr('href', redirectUrl);  
   }).fail(function(e) {
     console.log("Error", e);
   });

@@ -22,7 +22,7 @@
     <script src="{{ site.baseurl }}/js/bootstrap.min.js"></script>
     <script src="{{ site.baseurl }}/js/bootstrap-table.js"></script>
     <script src="{{ site.baseurl }}/js/bootstrap-table-export.js"></script>        
-    <script src="//rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>    
+    <script src="{{ site.baseurl }}/js//tableExport.js"></script>    
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,12 +38,10 @@
       {{ content }}
   
       <!-- footer -->
-      <hr>
-      
       <footer class="footer">
         <div class="col-md-12">
           <div class="row">
-            
+            <hr/>
             <div class="col-sm-4">
               <ul class="footer">
                 <li>
@@ -60,10 +58,12 @@
             
             <div class="col-sm-4">
               <ul class="footer">
-                <li>
-                  <a href="http://www.archives.gov/">The U.S. National Archives and Records Administration</a>
+                <li>                  
+                  <a href="http://www.archives.gov/" alt="The U.S. National Archives and Records Administration">
+                    <img src="{{ site.baseurl }}/img/nara-logo.png">
+                  </a>
                 </li>
-                <li>1-86-NARA-NARA or 1-866-272-6272</li>    
+                <li>1-86-NARA-NARA or 1-866-272-6272</li>
               </ul>
             </div>
             
