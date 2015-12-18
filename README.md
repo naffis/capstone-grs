@@ -12,9 +12,23 @@ The site contains data sets for active, approved NA-1005s submitted by Federal a
 
 The site also contains a small amount of additional information and links to other NARA resources on the responsibilities and status of email management across Federal agencies.
 
+## Contributions
+
+We welcome contributions. If you would like to contribute to the project you can do so by forking the repository and submitting your changes in a pull request. You can submit issues using [GitHub Issues](https://github.com/naffis/capstone-grs/issues).
+
+## License
+
+This project is in the public domain within the United States, and
+copyright and related rights in the work worldwide are waived through
+the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+
+All contributions to this project will be released under the CC0 dedication. By submitting a pull request, you are agreeing to comply with this waiver of copyright interest
+
+For more information, see [license](https://github.com/naffis/capstone-grs/blob/master/LICENSE.md).
+
 ## How to run
 
-Capstone GRS is built using Jekyll and hosted on GitHub pages. We're using several custom plugins that can be run on GitHub pages so you'll need to either build the content locally and then manually publish the _site content or automate the process using Travis CI.
+The Capstone GRS website is built using [Jekyll](http://jekyllrb.com/docs/home/), which creates static html pages that are then hosted on [GitHub Pages](https://pages.github.com/). There are a several ways to build and deploy to GitHub. The static pages can be created locally and then pushed to GitHub (one method is outlined below). You can also automate the build and deploy process by using Travis or another cotinuous integration tool. 
 
 To run the site locally:
 
@@ -44,16 +58,4 @@ Once you complete the steps above you can build locally and push to GitHub pages
 
     rake publish
 
-To have Travis CI automatically publish your content to GitHub pages you'll need to complete the steps above and then modify your .travis.yml file and Rakefile accordingly. Once you've done that you can simply commit your changes and Travis CI will build and publish the content for you. 
-
-## How you can help
-
-We welcome contributions. If you would like to contribute to the project you can do so by forking the repository and submitting your changes in a pull request. You can submit issues using [GitHub Issues](https://github.com/naffis/capstone-grs/issues).
-
-## License
-
-This project is in the public domain within the United States, and
-copyright and related rights in the work worldwide are waived through
-the [CC0 1.0 Universal public domain dedication](https://creativecommons.org/publicdomain/zero/1.0/).
-
-For more information, see [license](https://github.com/naffis/capstone-grs/blob/master/LICENSE.md).
+To have Travis CI automatically publish your content to GitHub pages you'll need to complete the steps above and then modify your .travis.yml file and Rakefile accordingly. Once you've done that you can simply commit your changes to build and publish the content. 
