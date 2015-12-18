@@ -4,7 +4,9 @@ module Jekyll
     	unless input.nil?
         input = input.gsub(/[\s+-]/, "-")
         input = input.gsub(/[^\w-]/, "-")
+        input = input.gsub(/\-+/, '-');
         input = input.downcase
+        input = input.slice(0, 51)
 	    end
     end
   end

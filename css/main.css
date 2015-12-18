@@ -15,54 +15,11 @@ html, body {
     padding-bottom: 2px;
 }
 
-/*
-nav {
-
-    top: 0;
-  position: fixed;  
-  background-color: #003E7E;
-
-}*/
-
-/*nav.blue {
-  background-color: #003E7E;  
-}
-*/
-
-/*nav.sticky {
-  top: 0;
-  position: fixed;  
-  background-color: #003E7E;
-}*/
-
-/*.navbar {        
-  border-top: 5px;
-  border-bottom: 5px;
-  border-style: solid;
-  border-color: #E5E2D3;
-  width: 100%;
-  z-index: 100;
-}
-
-.navbar-nav {
-  float: none;
-  margin: 0 auto;
-  display: table;
-  table-layout: fixed;
-  font-size: 16px;
-  text-transform: uppercase;
-  color: #0071E4;
-}*/
-
 .navbar-nav>li >a {
   display: inline-block;
   color: #000;
 }
 
-/*.navbar-nav > li > a:hover {
-    color: #000;
-}
-*/
 .navbar-nav>li:after {
   content: "|";
 }
@@ -142,7 +99,7 @@ nav {
   width: 100%;
 } 
 
-#data {  
+#explore {  
   padding-top: 75px;  
   background-color: #FFF;
   display: table;
@@ -157,32 +114,32 @@ nav {
   text-align: center;        
 }            
 
-#data p {
+#explore p {
   text-align: left;
   padding-left: 10%;
   padding-right: 10%;
   color: #000;
 }
 
-#data h1 {
+#explore h1 {
   padding-bottom: 30px;
   font-weight: 600;
 }
 
-#data ul {
+#explore ul {
   text-align: left;
   padding-left: 15%;
   padding-right: 10%;
   color: #000;
 }
 
-.data {
+.explore {
   position: relative;
   top: 200px;
   width: 100%;
 } 
 
-.data {
+.explore {
   position: relative;
   top: 200px;
   width: 100%;

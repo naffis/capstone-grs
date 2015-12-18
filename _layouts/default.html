@@ -89,8 +89,6 @@
 
     <script type="text/javascript">
       function getLinkUrl(partial, str) {
-        var oldStr = str;
-        
         if(!str) {
           return "";
         }
@@ -98,40 +96,22 @@
           return '<a href="' + str + '" target="_blank">' + str + '</a>';
         }
         else {
-          str = str.toLowerCase();
-
-          str = str.replace(/[^\w\s\n_-]+/gm, '-');
-          str = str.replace(/(^|\b\s)\s+($|\s?\b)/gm, '\\1\\2');
-          str = str.replace(/\s+/gm, '-');
-          str = str.replace(/.,?!/gm, '-');
-          str = str.replace(/\//gm, '-');
-          str = str.replace(/\\/gm, '-');
-          str = str.replace(/\-+/gm, '-');
-          str = str.slice(0, 51);
-          str = str.replace(/\-$/gm,'');
-
-          return '<a href="' + partial + '/' + sanitizeString(str) + '.html">' + oldStr + '</a>';
+          return '<a href="' + partial + '/' + sanitizeString(str) + '.html">' + str + '</a>';
         }
       };
 
       function sanitizeString(str) {
         if (str) {
-          var str = str.toLowerCase();
+          var new_str = str.replace(/[\s+-]/gm, "-");
+          new_str = new_str.replace(/[^\w-]/gm, "-");          
+          new_str = new_str.replace(/\-+/gm, '-');
+          new_str = new_str.toLowerCase();
+          new_str = new_str.slice(0, 51);
 
-          str = str.replace(/[^\w\s_-]+/gm, '-');
-          str = str.replace(/(^|\b\s)\s+($|\s?\b)/gm, '\\1\\2');
-          str = str.replace(/\s+/gm, '-');
-          str = str.replace(/.,?!/gm, '-');
-          str = str.replace(/\//gm, '-');
-          str = str.replace(/\\/gm, '-');
-          str = str.replace(/\-+/gm, '-');
-          str = str.slice(0, 51);
-          str = str.replace(/\-$/gm,'');
-
-          return str;
+          return new_str;
         }
         else {
-          return "";
+          return str;
         }        
       };
 
