@@ -37,15 +37,17 @@ module Jekyll
       #   create_pages(site, filename, data)
       # end
 
-      site.data.each do |key, data|        
-        dat = Hash.new
-        headers = data.map(&:keys)  
-        dat['keys'] = headers[0].map { |key|
-          sanitize_string(key)
-        }
-        dat['content'] = data.map(&:values)        
+      site.data.each do |key, data|
+        unless data.nil?
+          dat = Hash.new
+          headers = data.map(&:keys)  
+          dat['keys'] = headers[0].map { |key|
+            sanitize_string(key)
+          }
+          dat['content'] = data.map(&:values)        
 
-        create_pages(site, dat, key)
+          create_pages(site, dat, key)
+        end
       end
     end
 
