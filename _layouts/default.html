@@ -22,7 +22,8 @@
     <script src="{{ site.baseurl }}/js/bootstrap.min.js"></script>
     <script src="{{ site.baseurl }}/js/bootstrap-table.js"></script>
     <script src="{{ site.baseurl }}/js/bootstrap-table-export.js"></script>        
-    <script src="{{ site.baseurl }}/js//tableExport.js"></script>    
+    <script src="{{ site.baseurl }}/js//tableExport.js"></script>   
+    <script language="javascript" id="_fed_an_ua_tag" src="{{ site.baseurl }}/js/Universal-Federated-Analytics.1.0.js?agency=NARA&subagency=GITHUB"></script> 
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -107,6 +108,7 @@
           new_str = new_str.replace(/\-+/gm, '-');
           new_str = new_str.toLowerCase();
           new_str = new_str.slice(0, 51);
+          new_str = new_str.replace(/\-+$/gm, '');
 
           return new_str;
         }

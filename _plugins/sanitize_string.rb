@@ -2,11 +2,16 @@ module Jekyll
   module SanitizeStringFilter
     def sanitize_string(input)
     	unless input.nil?
-        input = input.gsub(/[\s+-]/, "-")
-        input = input.gsub(/[^\w-]/, "-")
-        input = input.gsub(/\-+/, '-');
         input = input.downcase
-        input = input.slice(0, 51)
+        input = input.gsub(/[^\w\s_-]+/, '-')
+        input = input.gsub(/(^|\b\s)\s+($|\s?\b)/, '\\1\\2')
+        input = input.gsub(/\s+/, '-')
+        input = input.gsub(/.,?!/, '-')
+        input = input.gsub(/\//, '-')
+        input = input.gsub(/\\/, '-')        
+        input = input.gsub(/\-+/, '-')
+        input = input[0..50]       
+        input = input.gsub(/\-+$/, '')
 	    end
     end
   end

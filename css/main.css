@@ -9,10 +9,10 @@ html, body {
 }
 
 .navbar-brand {
-    max-height: 50px;
-    overflow: visible;    
-    padding-top: 2px;
-    padding-bottom: 2px;
+  max-height: 50px;
+  overflow: visible;    
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .navbar-nav>li >a {
@@ -26,6 +26,13 @@ html, body {
 
 .navbar-nav>li:last-child:after {
   content: "";
+}
+
+.navbar-right {
+  padding-right: 15px;
+  padding-top: 15px;
+  color: #B33A3A;
+  font-weight: bold;
 }
 
 .banner {
