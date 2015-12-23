@@ -37,7 +37,6 @@ module Jekyll
       #   create_pages(site, filename, data)
       # end
 
-      puts "site.data = #{site.data.inspect}"
       site.data.each do |key, data|
         unless data.empty?
           dat = Hash.new
